@@ -50,7 +50,7 @@ function Postview() {
         <Typography className={classes.title}>Tittle of the post</Typography>
         <Box className={classes.head}>
              <Typography >Author : <span className={{fontWeight:600}}>Dedesh</span> </Typography>
-             <Typography style={{marginLeft: 'auto'}} >22 jun 2021</Typography>
+             <Typography style={{marginLeft: 'auto'}} >10 March 2022</Typography>
         </Box>
         <Typography >This is blog post description</Typography>
 
