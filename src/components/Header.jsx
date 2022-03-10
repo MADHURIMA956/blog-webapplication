@@ -21,6 +21,7 @@ const Header = () => {
         <AppBar className={classes.component} position="static">
         <Toolbar className={classes.container}>
             <a  className={classes.link} href="/"><Typography > Blog Application </Typography> </a>
+            <a  className={classes.link} href="/post"><Typography >Post</Typography> </a>
         </Toolbar>
       </AppBar>
     )
