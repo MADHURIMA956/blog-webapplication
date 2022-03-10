@@ -6,13 +6,17 @@ const useStyle = makeStyles({
         background :'#3F51B5',
         color: '#ffffff',
         width: '86%',
+    },
+    link:{
+        textDecoration:'none',
+        color: 'inherit',
     }
 })
 const LeftSide = () => {
     const classes = useStyle();
     return (
         <>
-            <Button variant="contained" className={classes.Blogbtn}>Create Blog</Button>
+           <a className={classes.link}  href="/create"> <Button variant="contained" className={classes.Blogbtn}>Create Blog</Button></a>
         </>
     )
 }

@@ -2,9 +2,12 @@ import {Box , makeStyles,Typography} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
     container: {
         padding:'0 100px',
+        [theme.breakpoints.down('md')]:{
+            padding: 0,
+        }
     },
     image:{
         width:'100%',
@@ -30,8 +33,11 @@ const useStyle = makeStyles({
         color: '#878787',
         display: 'flex',
         margin: '20px 0',
+        [theme.breakpoints.down('md')]:{
+            display: 'block',
+        }
     }
-});
+}));
 function Postview() {
     const classes = useStyle();
   return (
@@ -46,6 +52,8 @@ function Postview() {
              <Typography >Author : <span className={{fontWeight:600}}>Dedesh</span> </Typography>
              <Typography style={{marginLeft: 'auto'}} >22 jun 2021</Typography>
         </Box>
+        <Typography >This is blog post description</Typography>
+
     </Box>
   );
 }
