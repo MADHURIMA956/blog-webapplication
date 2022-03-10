@@ -44,7 +44,7 @@ const SinglePost = () => {
                 <Typography className={classes.text}>Sports</Typography>
                 <Typography className={classes.heading}>title for the post</Typography>
                 <Typography className={classes.text}>Author: Dinesh</Typography>
-                <Typography className={classes.descrp}>Hi from code for post sefckwjdf akjedcfjwdsjlfc hjasegcfujwgbfc agfckds</Typography>
+                <Typography className={classes.descrp}>Hi This is the description of my blog</Typography>
 
            </Box>
         </>
