@@ -1,3 +1,4 @@
+import {Helmet} from "react-helmet";
 import Header from "./components/Header";
 import Home from "./components/home/Home";
 import Createpost from "./components/DetailPost/Createpost";
@@ -10,6 +11,12 @@ function App() {
   return (
    
       <BrowserRouter>
+        <Helmet>
+                <meta charSet="utf-8" />
+                <title>Blog Application</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+                <meta name="description" content="Portfolio application" />
+      </Helmet>
       <Header/>
       <Box >
        <Routes>
