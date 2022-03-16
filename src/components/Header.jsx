@@ -1,4 +1,5 @@
 import {AppBar , Toolbar , Typography , makeStyles} from "@material-ui/core";
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles({
     component:{
@@ -20,8 +21,10 @@ const Header = () => {
     return (
         <AppBar className={classes.component} position="static">
         <Toolbar className={classes.container}>
-            <a  className={classes.link} href="/"><Typography > Blog Application </Typography> </a>
-            <a  className={classes.link} href="/post"><Typography >Post</Typography> </a>
+            <Link  className={classes.link} to="/"><Typography > Blog Application </Typography> </Link>
+            <Link  className={classes.link} to="/"><Typography > About Us </Typography> </Link>
+            <Link  className={classes.link} to="/"><Typography > Contact </Typography> </Link>
+            <Link  className={classes.link} to="/"><Typography > Login</Typography> </Link>
         </Toolbar>
       </AppBar>
     )

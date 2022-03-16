@@ -5,7 +5,7 @@ import Createpost from "./components/DetailPost/Createpost";
 import {Box} from "@material-ui/core";
 import Postview from "./components/DetailPost/Postview";
 import { BrowserRouter,Route , Routes } from "react-router-dom";
-
+import UpdatePost from "./components/DetailPost/UpdatePost";
 
 function App() {
   return (
@@ -21,8 +21,9 @@ function App() {
       <Box >
        <Routes>
           <Route path='/' element={<Home />}> </Route>
-          <Route path='/post' element={<Postview/>}></Route>
+          <Route path='/post/:id' element={<Postview/>}></Route>
           <Route path='/create' element={<Createpost/>}></Route>
+          <Route path='/update/:id' element={<UpdatePost/>}></Route>
        </Routes>
       </Box>
       </BrowserRouter>

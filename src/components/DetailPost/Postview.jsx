@@ -1,6 +1,9 @@
 import {Box , makeStyles,Typography} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useEffect, useState } from "react";
+import { getposts ,deletepost} from "../../service/api";
+import {Link,useNavigate,useParams} from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -38,21 +41,38 @@ const useStyle = makeStyles((theme) => ({
         }
     }
 }));
-function Postview() {
+const Postview = ({match} ) => {
     const classes = useStyle();
+    const navigate = useNavigate();
+    const [post, setPost] = useState({});
+    const url = 'https://www.wpbeginner.com/wp-content/uploads/2016/11/blogimagetools.jpg';
+    const { id } = useParams();
+    useEffect(() => {
+        const fetchData = async () => {
+            let data = await getposts(id);
+            setPost(data);
+        }
+        fetchData();
+    
+    },[]);
+
+    const deleteBlog = async () => {
+        await deletepost(post._id);
+        navigate('/');
+    }
   return (
     <Box className={classes.container}>
-        <img className={classes.image} src="http://cdn2.hubspot.net/hub/53/file-23115630-jpg/blog/images/blogging_image.jpg" alt="" />
+        <img className={classes.image} src={post.picture || url} alt="" />
         <Box className={classes.icons}>
-            <EditIcon className={classes.icoption} color='primary'/>
-            <DeleteIcon className={classes.icoption} color='error'/>
+            <Link to={`/update/${post._id}`}><EditIcon className={classes.icoption} color='primary'/></Link>
+            <DeleteIcon onClick={() => deleteBlog()} className={classes.icoption} color='error'/>
         </Box>
-        <Typography className={classes.title}>Tittle of the post</Typography>
+        <Typography className={classes.title}>{post.title}</Typography>
         <Box className={classes.head}>
-             <Typography >Author : <span className={{fontWeight:600}}>Dedesh</span> </Typography>
-             <Typography style={{marginLeft: 'auto'}} >10 March 2022</Typography>
+             <Typography >Author : <span className={{fontWeight:600}}>{post.username}</span> </Typography>
+             <Typography style={{marginLeft: 'auto'}} >{new Date(post.createDate).toDateString()}</Typography>
         </Box>
-        <Typography >This is blog post description</Typography>
+        <Typography >{post.description}</Typography>
 
     </Box>
   );

@@ -2,9 +2,9 @@
 
 import {Box, makeStyles,FormControl,InputBase,Button ,TextareaAutosize} from "@material-ui/core";
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import {postCreate} from '../../service/api'
+import { useState,useEffect } from "react";
+import { getposts,updatepost } from "../../service/api";
+import {useParams, useNavigate} from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -56,17 +56,26 @@ const inialValue = {
 }
 
 
-const Createpost = () => {
+const UpdatePost = ({match}) => {
     const classes = useStyle();
-    const [post , setPost] =useState(inialValue);
-    const navigate  = useNavigate();
+    const [post,setPost] = useState({});
+    const { id } = useParams();
+    const navigate = useNavigate();
+    useEffect(()=> {
+        const fetchData = async () => {
+          let data =   await getposts(id);
+          console.log(data)
+          setPost(data)
+        };
+        fetchData();
+    },[])
+
     const handleChange = (e) => {
         setPost({...post, [e.target.name] : e.target.value })
-    }
-
-    const savepostData = async () => {
-       await postCreate(post);
-       navigate('/')
+    };
+    const updateBlog = async () => {
+       await updatepost(id, post)
+       navigate(`/post/${id}`)
     }
     return(
        <Box className={classes.container}>
@@ -74,22 +83,23 @@ const Createpost = () => {
            <FormControl className={classes.form}>
                <AddBoxIcon fontSize="large"  color="action"/>
                <InputBase 
-                    onChange={(e) => handleChange(e)} 
-                    className={classes.text} 
-                    placeholder="title"
-                    name="title"
-                    />
-               <Button variant="contained"  onClick={() => savepostData()} className={classes.Blogbtn}>Publish</Button>
+               name="title"
+               className={classes.text} 
+               onChange={(e) => handleChange(e)} 
+               value={post.title}
+                placeholder="title" />
+               <Button onClick={()=> updateBlog()} variant="contained" className={classes.Blogbtn}>Update</Button>
            </FormControl>
            <TextareaAutosize 
+                name = "description"
                 rowsMin={5}
                 placeholder="Write your story..."
+                value={post.description}
                 className={classes.textarea}
-                name='description'
                 onChange={(e) => handleChange(e)}
             />
        </Box>
     )
 }
 
-export default Createpost;
+export default UpdatePost;

@@ -1,24 +1,24 @@
 
 import { Box,Typography ,makeStyles} from "@material-ui/core";
+// import { post } from "../../../server/route";
 const useStyle = makeStyles({
-    container:{
-        height: 350,
-        margin: 10,
-        borderRadius : 10,
+    container: {
         border: '1px solid #d3cede',
+        borderRadius: 10,
+        margin: 10,
         display: 'flex',
-        flexDirection:'column',
         alignItems: 'center',
-       
-        '& > *':{
-            padding:'0 5px 5px 5px',
+        flexDirection: 'column',
+        height: 350,
+        '& > *': {
+            padding: '0 5px 5px 5px'
         }
     },
-    image:{
-        height: 120,
+    image: {
         width: '100%',
-        objectFit:'cover',
-        borderRadius: '10px 10px 0 0'
+        objectFit: 'cover',
+        borderRadius: '10px 10px 0 0',
+        height: 150
     },
     text:{
         color: '#878787',
@@ -34,17 +34,17 @@ const useStyle = makeStyles({
     }
 })
 
-const SinglePost = () => {
+const SinglePost = ({post}) => {
     const classes = useStyle();
-
+    const url = post.picture || "https://www.wpbeginner.com/wp-content/uploads/2016/11/choose-best-blogging-platform.png"
     return (
         <>
             <Box className={classes.container}>
-                <img className={classes.image} src="https://www.wpbeginner.com/wp-content/uploads/2016/11/choose-best-blogging-platform.png" alt="wrapper" />
-                <Typography className={classes.text}>Sports</Typography>
-                <Typography className={classes.heading}>title for the post</Typography>
-                <Typography className={classes.text}>Author: Dinesh</Typography>
-                <Typography className={classes.descrp}>Hi This is the description of my blog</Typography>
+                <img className={classes.image} src={url} alt="wrapper" />
+                <Typography className={classes.text}>{post.categories}</Typography>
+                <Typography className={classes.heading}>{post.title}</Typography>
+                <Typography className={classes.text}>Author: {post.username}</Typography>
+                <Typography className={classes.descrp}>{post.description}</Typography>
 
            </Box>
         </>
